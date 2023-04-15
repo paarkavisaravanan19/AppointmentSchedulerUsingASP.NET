@@ -1,0 +1,87 @@
+﻿@{
+	int row = 1;
+}
+
+<h3>List of Availiable Meetings</h3>
+
+
+<a href="/User/CreateMeet"><button class="btn-outline-primary float-right">+ NEW Schedule</button></a>
+
+
+<table class="table table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th>Meeting ID</th>
+			<th>EmailID</th>
+			<th>Meeting Information Details</th>
+			<th>Short Note on Meet</th>
+			<th>From </th>
+			<th>To </th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (@ViewBag.status != "Update")
+		{
+			@foreach (SchedulerModel meet in @ViewBag.MeetingList)
+			{
+				<tr>
+					<td>@meet.MeetingID</td>
+					<td>@meet.emailID</td>
+					<td>@meet.MeetingInfoDetails</td>
+					<td>@meet.MeetingInfoBrief</td>
+					<td>@meet.FromDateTime</td>
+					<td>@meet.ToDateTime</td>
+					<td>
+						<div>
+							<a href="/User/UserIndex?opnMode=Update&MeetingId=@meet.MeetingID">
+								<button class="btn btn-outline-secondary">Update</button>
+							</a>
+							<a href="/User/UserIndex?opnMode=Delete&MeetingId=@meet.MeetingID"><button class="btn btn-outline-danger">Delete</button></a>
+						</div>
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+
+			@foreach (SchedulerModel meet in @ViewBag.MeetingList)
+			{
+				@if (@ViewBag.meetId != meet.MeetingID.ToString())
+				{
+					<tr>
+						<td>@meet.emailID</td>
+						<td>@meet.MeetingInfoDetails</td>
+						<td>@meet.MeetingInfoBrief</td>
+						<td>@meet.FromDateTime</td>
+						<td>@meet.ToDateTime</td>
+						<td></td>
+					</tr>
+				}
+				else
+				{
+					<form method="post" asp-controller="User" asp-action="UserIndex">
+						<input name="MeetingID" value="@meet.MeetingID" size="1" type="hidden" />
+					<tr>
+						<td>@meet.MeetingID</td>
+						<td><input name="emailID" value="@meet.emailID" /></td>
+						<td><input name="MeetingInfoDetails" value="@meet.MeetingInfoDetails" /></td>
+						<td><input name="MeetingInfoBrief" value="@meet.MeetingInfoBrief" /></td>
+						<td><input name="FromDateTime" value="@meet.FromDateTime.ToString("yyyy-MM-dd")" /></td>
+						<td><input name="ToDateTime" value="@meet.ToDateTime.ToString("yyyy-MM-dd")" /></td>
+						<td>
+							<div>
+								<button class="btn btn-outline-secondary" type="submit">Confirm</button>
+								<a href="/User/UserIndex" class="btn btn-outline-danger">Cancel</a>
+							</div>
+						</td>
+					</tr>
+					</form>
+				}
+
+			}
+		}
+	</tbody>
+</table>
+

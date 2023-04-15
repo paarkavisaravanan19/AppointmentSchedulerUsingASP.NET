@@ -1,0 +1,119 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+        overflow: hidden;
+    }
+
+        .topnav .search-container {
+            float: right;
+        }
+
+        .topnav input[type=text] {
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+
+        .topnav .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+    media screen and (max-width: 900px) {
+        .topnav .search-container
+
+    {
+        float: none;
+    }
+
+    .topnav .search-container button:hover {
+        background: #ccc;
+    }
+
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+
+    .topnav input[type=text] {
+        border: 1px solid #ccc;
+    }
+
+    }
+</style>
+
+<body>
+
+    @using (Html.BeginForm( "SearchIndex","SearchMeet", FormMethod.Post))
+    {
+        <div class="topnav">
+            <div class="search-container">
+                <input type="text" placeholder="Search" name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+    @if ((bool)ViewData["ShowDiv"])
+    {
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Meeting ID</th>
+                    <th>EmailID</th>
+                    <th>Meeting Information Details</th>
+                    <th>Short Note on Meet</th>
+                    <th>From </th>
+                    <th>To </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (SchedulerModel meet in @ViewBag.MeetingList)
+                {
+                    <tr>
+					<td>@meet.MeetingID</td>
+					<td>@meet.emailID</td>
+					<td>@meet.MeetingInfoDetails</td>
+					<td>@meet.MeetingInfoBrief</td>
+					<td>@meet.FromDateTime</td>
+					<td>@meet.ToDateTime</td>
+					
+                        </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+       <p>Sorry Buddy! No flowers are bloomed till now!:((</p> 
+    }
+
+</body>
