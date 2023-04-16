@@ -68,8 +68,8 @@ namespace AppointmentApplication.Controllers
 					meetModel.emailID = (string)reader[1];
 					meetModel.MeetingInfoDetails = (string)reader[2];
 					meetModel.MeetingInfoBrief = (string)reader[3];
-                    meetModel.FromDateTime = (DateTime)reader[4];
-                    meetModel.ToDateTime = (DateTime)reader[5];
+                    meetModel.FromDateTime = reader.GetDateTime(4);
+                    meetModel.ToDateTime = reader.GetDateTime(4);
                     _meetingList.Add(meetModel);
                 }
                 reader.Close();
@@ -89,8 +89,8 @@ namespace AppointmentApplication.Controllers
 			string updateQuery = $"UPDATE MeetingInformationTable SET emailID = '{schedulerModel.emailID}'," +
 					$"MeetingInfoDetails = '{schedulerModel.MeetingInfoDetails}', " +
 					$"MeetingInfoBrief = '{schedulerModel.MeetingInfoBrief}', " +
-					$"FromDateTime  = '2023-05-20 12:30:00 '," +
-					$"ToDateTime ='2023-05-22 01:30:00' WHERE MeetingID = {schedulerModel.MeetingID};";
+					$"FromDateTime  = '2023-04-23 09:30:00'," +
+					$"ToDateTime ='2023-04-23 10:30:00' WHERE MeetingID = {schedulerModel.MeetingID};";
 
 			try
 			{
@@ -124,7 +124,7 @@ namespace AppointmentApplication.Controllers
 			schedulerModel.FromDateTime= Convert.ToDateTime(Request.Form["FromDateTime"]);
 			schedulerModel.ToDateTime = Convert.ToDateTime(Request.Form["ToDateTime"]); 
 
-			string addScheduleQuery = $"INSERT INTO MeetingInformationTable VALUES('{schedulerModel.emailID}','{schedulerModel.MeetingInfoDetails}','{schedulerModel.MeetingInfoBrief}','2023-05-22 01:30:00','2023-05-22 01:30:00')";
+			string addScheduleQuery = $"INSERT INTO MeetingInformationTable VALUES('{schedulerModel.emailID}','{schedulerModel.MeetingInfoDetails}','{schedulerModel.MeetingInfoBrief}','2023-05-23 01:30:00','2023-05-23 01:30:00')";
 
 			try
 			{

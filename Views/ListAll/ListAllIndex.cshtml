@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h3>List of Upcoming Meeting</h3>
+<table class="table table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th>Meeting ID</th>
+			<th>EmailID</th>
+			<th>Meeting Information Details</th>
+			<th>Short Note on Meet</th>
+			<th>From </th>
+			<th>To </th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+			@foreach (SchedulerModel meet in @ViewBag.MeetingList)
+			{
+				<tr>
+					<td>@meet.MeetingID</td>
+					<td>@meet.emailID</td>
+					<td>@meet.MeetingInfoDetails</td>
+					<td>@meet.MeetingInfoBrief</td>
+					<td>@meet.FromDateTime</td>
+					<td>@meet.ToDateTime</td>
+				</tr>
+			}
+			</tbody>
+			</table>
+		
+
